@@ -1,6 +1,6 @@
 class AddressModel {
 
-    constructor(id, name, room, society, landmark, city, pincode){
+    constructor(id, name, room, society, landmark, city, pincode, number){
 
         this.id = id;
         this.name = name;
@@ -8,7 +8,8 @@ class AddressModel {
         this.society = society;
         this.landmark = landmark;
         this.city = city;
-        this.pincode = pincode
+        this.pincode = pincode;
+        this.number = number
 
     }
 

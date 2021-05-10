@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {View, Text, StyleSheet, Dimensions, Image, FlatList, Pressable, ActivityIndicator} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,8 +7,8 @@ const {width, height} = Dimensions.get('window')
 import { AntDesign } from '@expo/vector-icons';
 import * as orderAction from '../../store/action/order'
 import * as cartAction from '../../store/action/cart'
-import AddressModel from '../../model/AddressModel'
-import RazorpayCheckout from 'react-native-razorpay';
+// import AddressModel from '../../model/AddressModel'
+// import RazorpayCheckout from 'react-native-razorpay';
 
 
 const CheckoutScreen = ({navigation, route}) => {
@@ -24,7 +24,9 @@ const CheckoutScreen = ({navigation, route}) => {
     for (let keys in cartItems){    
         cartList.push(new CartModel(cartItems[keys].id, cartItems[keys].name, cartItems[keys].price, cartItems[keys].wt, cartItems[keys].description, cartItems[keys].category, cartItems[keys].catid, cartItems[keys].image, cartItems[keys].quantity))
     }
-    addressList.push(address)
+    useEffect(()=>{addressList.push(address)},
+    [])
+    
     
     const [load, setLoad] = useState(false)
     
@@ -55,13 +57,13 @@ const CheckoutScreen = ({navigation, route}) => {
             },
             theme: {color: '#009efd'}
         }
-        RazorpayCheckout.open(options).then((data) => {
-            // handle success
-            alert(`Success: ${data.razorpay_payment_id}`);
-        }).catch((error) => {
-            // handle failure
-            alert(`Error: ${error.code} | ${error.description}`);
-        });
+        // RazorpayCheckout.open(options).then((data) => {
+        //     // handle success
+        //     alert(`Success: ${data.razorpay_payment_id}`);
+        // }).catch((error) => {
+        //     // handle failure
+        //     alert(`Error: ${error.code} | ${error.description}`);
+        // });
     }
     const onlineHandler = async() => {
         setLoad(true)

@@ -69,15 +69,19 @@ const HomeScreen = ({navigation}) => {
           }}
           
         />
-        <StaggeringView delay={1000} style={{width:Dimensions.get('window').width*0.95, height:150,margin:20, borderRadius:20 ,alignSelf:'center',}}>
+        <StaggeringView delay={1000} style={{width:Dimensions.get('screen').width, margin:20, borderRadius:20 ,alignSelf:'center',}}>
         <FlatList
+          showsHorizontalScrollIndicator={false}
+          snapToAlignment="start"
+          snapToInterval={Dimensions.get('window').width}
+          decelerationRate='fast'
           horizontal
           data={banner}
           keyExtractor={x => x.id}
           renderItem={({item}) =>{
-            return<View style={{marginVertical:8, alignSelf:'center'}}>
+            return<View style={{marginVertical:4, alignSelf:'center'}}>
                     
-                    <View style={{width:300, padding:8, borderRadius:10, height:250}}>
+                    <View style={{width:Dimensions.get('screen').width,  borderRadius:10, height:(Dimensions.get('screen').width)/2}}>
                     
                     <Image
                         // resizeMethod='scale'

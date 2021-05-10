@@ -26,6 +26,7 @@ const AddressScreen = ({navigation}) => {
     const [landmark, setLandmark] = useState('')
     const [pincode, setPincode] = useState('')
     const [city, setCity] = useState('')
+    const [number,setNumber] = useState()
     const adressList = useSelector(x=>x.address.list)
     console.log('address', adressList.length)
 
@@ -48,17 +49,18 @@ const AddressScreen = ({navigation}) => {
   const dispatch = useDispatch()
 
   const addressHandler = (item) => {
-    if(adressList.length>0){
+    if(list>0){
       
       navigation.navigate('Checkout',{address:item})
     }else{
     {if(name === '' || room === '' || society === '' || landmark === '' || pincode === '' || city === ''){
       alert('All Fields are compulsory')
     }else{
-    dispatch(addressAction.addAddress(name, room, society,pincode, landmark, city))
+    dispatch(addressAction.addAddress(name, room, society,pincode, landmark, city, number))
     let addressItem = new AddressModel(0,name, room, society, landmark, city, pincode)
     console.log("adress", addressItem)
-    navigation.navigate('Checkout',{address:addressItem})}}}
+    navigation.navigate('Checkout',{address:addressItem})
+  }}}
   }
   const [list, setList] = useState(adressList.length>0) 
   const geocoding = async() => {
@@ -75,8 +77,8 @@ const AddressScreen = ({navigation}) => {
     keyExtractor={x=>x.id}
     renderItem={({item}) =>{
       return<TouchableOpacity onPress={()=>addressHandler(item)}>
-      <View style={{width:width*0.9, borderRadius:10, padding:8, alignSelf:'center', backgroundColor:'white'}}>
-        <Text style={{fontFamily:'regular', fontSize:18}}>{item.name}</Text>
+      <View style={{width:width*0.9, borderRadius:10, padding:8, alignSelf:'center', backgroundColor:'white', margin:8}}>
+        <Text style={{fontFamily:'medium', fontSize:18}}>{item.name}</Text>
         <Text style={{fontFamily:'book'}}>{item.room}</Text>
         <Text style={{fontFamily:'book'}}>{item.society}</Text>
         <Text style={{fontFamily:'book'}}>{item.pincode}, {item.city}</Text>
@@ -126,6 +128,18 @@ const AddressScreen = ({navigation}) => {
                 value = {name}
                 onChangeText={setName}
                 label='My Name'
+                mode = 'flat'
+                style={{backgroundColor:'white'}}
+                theme ={{colors:{primary:'#33a466',underlineColor:'transparent'}}}
+            />
+            </View>
+
+            <View style={{width:'92%', alignSelf:'center', marginVertical:4}}>
+            <TextInput
+                keyboardType='number-pad'
+                value = {number}
+                onChangeText={setNumber}
+                label='My Number'
                 mode = 'flat'
                 style={{backgroundColor:'white'}}
                 theme ={{colors:{primary:'#33a466',underlineColor:'transparent'}}}

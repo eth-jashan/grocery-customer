@@ -82,7 +82,7 @@ export default (state = initialState, action) => {
             }
 
             case CLEAR_CART:
-                return state
+                return initialState
 
         default:
             return state
