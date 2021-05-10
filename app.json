@@ -20,10 +20,15 @@
       "supportsTablet": true
     },
     "android": {
+      "config":{
+        "googleMaps":{
+          "apiKey":"AIzaSyD3TwksghI3pgX0pDz081ATfIiCQeut00I"
+          }},
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.jashan1709.ecommerceapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
