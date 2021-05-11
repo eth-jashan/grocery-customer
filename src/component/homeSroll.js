@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core'
 import React from 'react'
-import {View, StyleSheet, Text, FlatList, Image, TouchableOpacity} from 'react-native'
+import {View, StyleSheet, Text, FlatList, Image, TouchableOpacity, Dimensions} from 'react-native'
 import { useSelector } from 'react-redux'
 import ProductCard from './productCard'
 
@@ -35,7 +35,7 @@ const HomeScroll = ({item, index}) => {
             console.log(item.id)}}>
             <View style={{marginVertical:8, alignSelf:'center'}}>
                     
-                    <View style={{width:300, padding:8, borderRadius:10, height:250}}>
+                    <View style={{width:Dimensions.get('screen').width,  borderRadius:10, height:300}}>
                     <Image
                         // resizeMethod='scale'
                         resizeMode='cover'
