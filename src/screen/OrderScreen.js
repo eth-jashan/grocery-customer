@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 const OrderScreen = ({navigation}) => {
 
     const order = useSelector(x=>x.order.list)
-    console.log('order', order)
+    
 
     const backgroundColor = (item) => {
 

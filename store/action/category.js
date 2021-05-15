@@ -20,7 +20,7 @@ export const categoryFetch = () => {
     categoryList.push(new CategoryModel(keys, resData[keys].name, resData[keys].description, resData[keys].icon))
     }
     
-    console.log("response", resData)
+    
 
     dispatch({type:FETCH_CATEGORY, list:categoryList})
 

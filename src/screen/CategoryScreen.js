@@ -7,7 +7,7 @@ import * as categoryaction from '../../store/action/category'
 const CategoryScreen = ({navigation}) => {
 
     const list = useSelector(x=>x.category.categoryList)
-    console.log("list", list)
+    
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(categoryaction.categoryFetch())

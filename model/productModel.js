@@ -1,5 +1,5 @@
 class ProductModel {
-    constructor(id, name, price, wt, description, category, catid, image){
+    constructor(id, name, price, wt, description, category, catid, image, offer, offerPrice){
         this.id = id;
         this.name = name;
         this.price = price;
@@ -7,7 +7,9 @@ class ProductModel {
         this.description = description;
         this.category = category;
         this.catid = catid;
-        this.image = image
+        this.image = image;
+        this.offer = offer 
+        this.offerPrice = offerPrice
     }
 }
 

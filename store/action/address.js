@@ -6,7 +6,7 @@ export const FETCH_ADDRESS = 'FETCH_ADDRESS'
 export const addAddress = (name, room, society, pincode, landmark,city, number) => {
 
     return async (dispatch, getState) => {
-        console.log('number', number)
+        
         const uid = getState().auth.uid
         const response = await fetch(`https://grocery-app-6bdd0-default-rtdb.firebaseio.com/customer/${uid}/address.json?`,{
             method:'POST',

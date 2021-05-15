@@ -31,6 +31,7 @@ const HomeScreen = ({navigation}) => {
             await dispatch(productAction.fetchProduct())
             await dispatch(orderAction.fetchOrder())
             await dispatch(bannerAction.fetchBanner())
+            await dispatch(bannerAction.fetchCatBanner())
             dispatch(addressAction.fetchAddress())
             setLoad(false)
             console.log("run")            

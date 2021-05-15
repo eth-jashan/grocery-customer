@@ -1,8 +1,9 @@
 import BannerModel from "../../model/BannerModel"
-import { ADD_BANNER, FETCH_BANNER } from "../action/banner"
+import {FETCH_BANNER, FETCH_CATBANNER } from "../action/banner"
 
 const initialState = {
-    list:[]
+    list:[], 
+    catList:[]
 }
 
 export default (state=initialState, action) => {
@@ -13,6 +14,11 @@ export default (state=initialState, action) => {
             return{
                 ...state,
                 list:action.list
+            }
+        case FETCH_CATBANNER:
+            return{
+                ...state,
+                catList:action.list
             }
         default:
             return state

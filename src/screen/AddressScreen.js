@@ -28,7 +28,7 @@ const AddressScreen = ({navigation}) => {
     const [city, setCity] = useState('')
     const [number,setNumber] = useState()
     const adressList = useSelector(x=>x.address.list)
-    console.log('address', adressList.length)
+   
 
 
   useEffect(() => {
@@ -58,14 +58,14 @@ const AddressScreen = ({navigation}) => {
     }else{
     dispatch(addressAction.addAddress(name, room, society,pincode, landmark, city, number))
     let addressItem = new AddressModel(0,name, room, society, landmark, city, pincode)
-    console.log("adress", addressItem)
+    
     navigation.navigate('Checkout',{address:addressItem})
   }}}
   }
   const [list, setList] = useState(adressList.length>0) 
   const geocoding = async() => {
     const response = await fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=19.01268&longitude=73.01331&localityLanguage=en')
-    console.log(await response.json())
+    
   }
 
   if(list>0){

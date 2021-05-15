@@ -11,7 +11,7 @@ export const createOrder = (address, paymentMode, order, orderTotal) => {
 
         const number = getState().auth.cust_num
         let date = new Date().toISOString()
-        console.log(date)
+        
         const uid = getState().auth.uid
 
         const response = await fetch('https://grocery-app-6bdd0-default-rtdb.firebaseio.com/order.json?',{
@@ -68,7 +68,7 @@ return async (dispatch, getState)=>{
     console.log('Strat1')
         const number = getState().auth.cust_num
         let date = new Date().toISOString()
-        console.log(date)
+       
         const uid = getState().auth.uid
 
         const response = await fetch('https://grocery-app-6bdd0-default-rtdb.firebaseio.com/order.json?',{
@@ -124,12 +124,12 @@ export const fetchOrder = () => {
         let orderList = []
         const resData = await response.json()
         for(const key in resData){
-            console.log('ordersssss')
+            
             orderList.push(new OrderModel(key, resData[key].number, resData[key].order, resData[key].orderTotal, resData[key].date, resData[key].status, resData[key].address, resData[key].paymentMode, resData[key].uid))
         }
 
         
-        console.log('Order', orderList)
+        
         
         dispatch({type:FETCH_ORDER, list:orderList.filter(x=>x.uid === uid)})
 

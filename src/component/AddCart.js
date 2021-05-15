@@ -10,7 +10,7 @@ const AddCart = ({ item, addCart, decreaseCart}) => {
     
     
     const cartList = useSelector(x=>x.cart.list)
-    console.log("cart", cartList)
+    
 
     
 

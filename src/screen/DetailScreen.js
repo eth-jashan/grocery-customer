@@ -53,10 +53,10 @@ const DetailScreen = ({route, navigation}) => {
     const cartAvailable = () => {
         if((cartList.filter(x=>x.id === item.id)).length>0){
             setThere(true)
-            console.log("Indeiiiii", isThere)
+            
         }else{
             setThere(false)
-            console.log("Indeiiiii", isThere)
+            
         }
     }
 
