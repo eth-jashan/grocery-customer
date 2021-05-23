@@ -2,21 +2,21 @@ export const ADD_ITEM = "ADD_ITEM"
 export const DECREASE_ITEM = 'DECREASE_ITEM'
 export const CLEAR_CART = 'CLEAR_CART'
 
-export const addItem = (item) => {
+export const addItem = (item, price, wt) => {
 
     return async (dispatch, getState) => {
-
-        dispatch({type:ADD_ITEM, item:item})
+        console.log('Done')
+        dispatch({type:ADD_ITEM, item:item, price, wt})
 
     }
 
 }
 
-export const decreaseItem = (item) => {
+export const decreaseItem = (item, price, wt) => {
 
     return async (dispatch, getState) => {
 
-        dispatch({type:DECREASE_ITEM, item:item})
+        dispatch({type:DECREASE_ITEM, item:item,  price, wt})
 
     }
 

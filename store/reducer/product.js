@@ -5,7 +5,8 @@ import { FETCH_PRODUCT } from "../action/product"
 
 const initialState={
     productList:[],
-    productCount:0
+    productCount:0,
+    
 }
 
 export default (state=initialState, action) => {

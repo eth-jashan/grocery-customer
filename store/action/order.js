@@ -46,6 +46,7 @@ export const confirmOrder = () => {
 
         const id = getState().order.id
         const rezpId = getState().order.rzpId
+        console.log('id', id)
 
         await fetch(`https://grocery-app-6bdd0-default-rtdb.firebaseio.com/order/${id}.json?`,{
             method:'PATCH',
@@ -111,7 +112,7 @@ return async (dispatch, getState)=>{
   })
   const resData2 = await response2.json()
 //   setRzpId(resData2.id)
-dispatch({type:CREATE_ONLINE, id:resData.id, rzpId:resData2.id})
+dispatch({type:CREATE_ONLINE, id:resData.name, rzpId:resData2.id})
 }
 }
 

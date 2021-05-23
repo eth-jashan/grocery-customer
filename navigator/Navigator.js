@@ -21,6 +21,7 @@ import { Avatar } from 'react-native-paper'
 import { useDispatch, useSelector } from 'react-redux';
 import * as authAction from '../store/action/auth'
 import {Linking} from 'react-native'
+import PaymentMode from '../src/screen/PaymnetMode';
 
 
 
@@ -43,6 +44,7 @@ return(
         <FlowStack.Screen name='Checkout' component={CheckoutScreen} />
         <FlowStack.Screen name='ProductList' component={ProductScreen} />
         <FlowStack.Screen name='DrawerScreen' component={DrawerScreen} />
+        <FlowStack.Screen name='Payment' component={PaymentMode} />
     </FlowStack.Navigator>
     )
 }
@@ -112,7 +114,7 @@ return(
 const Tab = createMaterialBottomTabNavigator();
 
 const BottomStack = () => {
-
+    const count  = useSelector(x=>x.cart.cartTotal)
     return (
         <Tab.Navigator
           initialRouteName="Home"
@@ -136,7 +138,9 @@ const BottomStack = () => {
             options={{
               tabBarLabel: 'Category',
               tabBarIcon: ({ color }) => (
-                <Feather name="list" size={24} color={color}/>
+              <View>                
+                <Feather  name="list" size={24} color={color}/>
+              </View>
               ),
             }}
           />
@@ -147,7 +151,12 @@ const BottomStack = () => {
             options={{
               tabBarLabel: 'Cart',
               tabBarIcon: ({ color }) => (
-                <Feather name="shopping-cart" size={24} color={color}/>
+                count>0?<View>
+                <View style={{elevation:4, height:16, width:16, backgroundColor:'red', borderRadius:10, left:20, bottom:4, justifyContent:'center'}}>
+                  <Text style={{fontFamily:'book',color:'white', fontSize:8, alignSelf:'center'}}>{count}</Text>
+                </View>
+                <Feather style={{position:'absolute'}} name="shopping-cart" size={24} color={color}/>
+                </View>:<Feather style={{position:'absolute'}} name="shopping-cart" size={24} color={color}/>
               ),
             }}
           />

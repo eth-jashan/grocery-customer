@@ -14,8 +14,9 @@ export const fetchProduct = () => {
     const itemList = []
 
     for(const keys in resData){
+            console.log('Weight', resData[keys].price)
 
-        itemList.push(new ProductModel(keys, resData[keys].name, resData[keys].price, resData[keys].wt, resData[keys].description, resData[keys].catName, resData[keys].catId, resData[keys].image, resData[keys].offer === undefined?false:resData[keys].offer, resData[keys].offerPrice ))
+        itemList.push(new ProductModel(keys, resData[keys].name, resData[keys].price,  resData[keys].description, resData[keys].catName, resData[keys].catId, resData[keys].image))
     
     }
 

@@ -8,9 +8,10 @@ import ProductCard from '../component/productCard';
 import { useDispatch, useSelector } from 'react-redux';
 import * as cartAction from '../../store/action/cart'
 const {width, height} = Dimensions.get('window')
-import { Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import CartModel from '../../model/CartModel';
 import AddCart from '../component/AddCart';
+import ModalSelector from 'react-native-modal-selector';
 
 const DetailScreen = ({route, navigation}) => {
     
@@ -26,14 +27,14 @@ const DetailScreen = ({route, navigation}) => {
 
     const addCart = async() => {
         
-        await dispatch(cartAction.addItem(item))
+        await dispatch(cartAction.addItem(item, item.price[selectedPrice].price, item.price[selectedPrice].wt))
         
     }
 
     const decreaseCart = async() => {
         
 
-       await dispatch(cartAction.decreaseItem(item))
+       await dispatch(cartAction.decreaseItem(item, item.price[selectedPrice].price, item.price[selectedPrice].wt))
         
     }
     
@@ -47,8 +48,23 @@ const DetailScreen = ({route, navigation}) => {
         cartList.push(new CartModel(cart[keys].id, cart[keys].name, cart[keys].price, cart[keys].wt, cart[keys].description, cart[keys].category, cart[keys].catid, cart[keys].image, cart[keys].quantity))
     }
 
+    const productdata = []
+
     const [isThere, setThere] = useState((cartList.filter(x=>x.id === item.id)).length>0?true:false)
-    
+    const [selectedPrice, setSelectedPrice] = useState(0);
+    for(let keys in item.price){
+        productdata.push({key:keys, 
+        label:item.price[keys].offer?`₹ ${item.price[keys].offerPrice} for ${item.price[keys].wt}`:`₹ ${item.price[keys].price} for ${item.price[keys].wt}`,
+        component:!item.price[keys].offer?<View style={{ width:'100%'}}>
+        <Text style={{color: 'black', fontFamily:'book', fontSize:20}}>₹ {item.price[keys].price} for {item.price[keys].wt}</Text>
+        </View>:
+        <View style={{ width:'100%', flexDirection:'row', justifyContent:'space-between'}}>
+        <Text style={{color: 'black', fontFamily:'book', fontSize:20}}>₹ {item.price[keys].price} for {item.price[keys].wt}</Text>
+        <View style={{padding:4, backgroundColor:'red', width:'30%', borderRadius:4}}>
+                    <Text style={{fontFamily:'book', color:'white', alignSelf:'center'}}>{(((parseFloat(item.price[keys].price)-parseFloat(item.price[keys].offerPrice))/parseFloat(item.price[keys].price))*100).toFixed()} %</Text>
+                </View>
+        </View> })
+    }
 
     const cartAvailable = () => {
         if((cartList.filter(x=>x.id === item.id)).length>0){
@@ -85,8 +101,6 @@ const DetailScreen = ({route, navigation}) => {
         <View style={{flexDirection:'row', justifyContent:'space-between', padding:12}}> 
         <View style={{alignSelf:'center'}}>
         <Text style={{fontFamily:'medium', fontSize:28}}>{item.name}</Text>
-        <Text style={{fontFamily:'book', fontSize:20, color:'#33a466'}}>{`1 Package - ${item.wt}`}</Text>
-        <Text style={{fontFamily:'medium', fontSize:30, alignItems:'center'}}>₹ {item.price}</Text>
         </View>
 
         <View style={{alignSelf:'center'}}>
@@ -103,12 +117,31 @@ const DetailScreen = ({route, navigation}) => {
         </View>
         {/*  */} 
 
-        <AddCart
-            addCart={addCart}
-            decreaseCart={decreaseCart}
-            item={item}
-            
-        />
+        <ModalSelector
+                    backdropPressToClose
+                    data={productdata}
+                    initValue="Select something yummy!"
+                    supportedOrientations={['landscape']}
+                    accessible={true}
+                    scrollViewAccessibilityLabel={'Scrollable options'}
+                    cancelButtonAccessibilityLabel={'Cancel Button'}
+                    onChange={(option)=>{ setSelectedPrice(parseInt(option.key))}}>
+                    <View style={{width:'100%'}}>
+                    <Pressable style={{marginTop:12, borderWidth:1, borderColor:'#3DAB85', padding:10, height:40, borderRadius:8, alignItems:'center', alignSelf:'center', flexDirection:'row', justifyContent:'space-between',width:'90%'}}>
+                        <Text style={{fontFamily:'book', color:'#3DAB85'}}>{productdata[selectedPrice].label}</Text>
+                        <AntDesign style={{alignSelf:'center', marginLeft:4}} name="caretdown" size={12} color="#3DAB85" />
+                    </Pressable>
+                    </View>
+        </ModalSelector>
+
+        {item.price.map((items, index)=>{
+                if(index === selectedPrice){
+                return<AddCart
+                id = {item.price[index].wt.concat(item.id)}
+                addCart={addCart}
+                decreaseCart={decreaseCart}
+            />}else null
+            })}
 
         
         

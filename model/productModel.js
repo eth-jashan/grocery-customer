@@ -1,15 +1,13 @@
 class ProductModel {
-    constructor(id, name, price, wt, description, category, catid, image, offer, offerPrice){
+    constructor(id, name, price,  description, category, catid, image,){
         this.id = id;
         this.name = name;
         this.price = price;
-        this.wt = wt;
         this.description = description;
         this.category = category;
         this.catid = catid;
         this.image = image;
-        this.offer = offer 
-        this.offerPrice = offerPrice
+
     }
 }
 

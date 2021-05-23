@@ -54,10 +54,6 @@ const HomeScreen = ({navigation}) => {
       <EvilIcons onPress={()=>navigation.navigate('DrawerScreen')} name="search" size={30} color="black" />
       </View>
       
-      {/* <FadeInView style={{width:screenWidth, padding:10}}>
-      <Text style={{fontFamily:'light', fontSize:35}}>Welcome</Text>
-      <Text style={{fontFamily:'medium', fontSize:40}}>User</Text>
-      </FadeInView>         */}
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -80,12 +76,12 @@ const HomeScreen = ({navigation}) => {
           data={banner}
           keyExtractor={x => x.id}
           renderItem={({item}) =>{
+            console.log('banner', item)
             return<View style={{marginVertical:4, alignSelf:'center'}}>
                     
                     <View style={{width:Dimensions.get('screen').width,  borderRadius:10, height:(Dimensions.get('screen').width)/2}}>
                     
                     <Image
-                        // resizeMethod='scale'
                         resizeMode='cover'
                         style={{width:'100%',height:"100%"}}
                         source={{uri:item.url}}

@@ -41,38 +41,38 @@ const CheckoutScreen = ({navigation, route}) => {
     let username = 'rzp_live_oTfAV52ZxEFWd9';
     let password = 'NsWMfAbyq0rDh66RV0ppOaqb';
     const orderId = useSelector(x=>x.order.id)
-    const checkoutHandler = () => {
-        var options = {
-            description: 'Scan towards hassle free dine in',
-            image: 'https://i.imgur.com/3g7nmJC.png',
-            currency: 'INR',
-            key: username,
-            amount: (5*100).toString(),
-            name: 'Jaarx',
-            order_id: orderId,//Replace this with an order_id created using Orders API. Learn more at https://razorpay.com/docs/api/orders.
-            prefill: {
-            email: 'gaurav.kumar@example.com',
-            contact: '9191919191',
-            name: 'Gaurav Kumar'
-            },
-            theme: {color: '#009efd'}
-        }
-        // RazorpayCheckout.open(options).then((data) => {
-        //     // handle success
-        //     alert(`Success: ${data.razorpay_payment_id}`);
-        // }).catch((error) => {
-        //     // handle failure
-        //     alert(`Error: ${error.code} | ${error.description}`);
-        // });
-    }
+    // const checkoutHandler = () => {
+    //     var options = {
+    //         description: 'Scan towards hassle free dine in',
+    //         image: 'https://i.imgur.com/3g7nmJC.png',
+    //         currency: 'INR',
+    //         key: username,
+    //         amount: (5*100).toString(),
+    //         name: 'Mogambo',
+    //         order_id: orderId,//Replace this with an order_id created using Orders API. Learn more at https://razorpay.com/docs/api/orders.
+    //         prefill: {
+            
+    //         },
+    //         theme: {color: '#009efd'}
+    //     }
+    //     RazorpayCheckout.open(options).then((data) => {
+    //         // handle success
+    //         alert(`Success: ${data.razorpay_payment_id}`);
+    //         dispatch(cartAction.clearCart())
+    //         navigation.navigate('Home')
+    //     }).catch((error) => {
+    //         // handle failure
+    //         alert(`Error: ${error.code} | ${error.description}`);
+    //     });
+    // }
     const onlineHandler = async() => {
         setLoad(true)
         console.log('Strat')
         await dispatch(orderAction.onlineOrder(addressList, "Online", cartList, cartWorth))
         await checkoutHandler()
-        await dispatch(cartAction.clearCart())
+        
         setLoad(false)
-        navigation.navigate('Home')
+        
     }
     const cancelHandler = async() => {
 
@@ -124,8 +124,8 @@ const CheckoutScreen = ({navigation, route}) => {
                 <Text style={{fontFamily:'book', fontSize:18}}>Cart Total :</Text>
                 <Text style={{fontFamily:'medium', fontSize:22}}>₹ {cartWorth}</Text>
             </View>
-            <Pressable onPress={orderHandler} style={{width:'50%', backgroundColor:"#33a466", borderRadius:10, padding:10}}>
-                <Text style={{fontFamily:'book', fontSize:18, color:'white', alignSelf:'center'}}>Place Order</Text>
+            <Pressable onPress={()=>navigation.navigate('Payment',{total:cartWorth, cartList, addressList})} style={{width:'50%', backgroundColor:"#33a466", borderRadius:10, padding:10}}>
+                <Text style={{fontFamily:'book', fontSize:18, color:'white', alignSelf:'center'}}>Payment Mode</Text>
             </Pressable>
         </View>
             

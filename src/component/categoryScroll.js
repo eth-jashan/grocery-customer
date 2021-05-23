@@ -8,16 +8,15 @@ const CategoryScroll = ({data}) => {
     return(
         <View style={{margin:10}}>
         <TouchableOpacity onPress={()=>navigation.navigate('ProductList', {id:data.id, name:data.name})}>
-        
-        <View style={{padding:8, height:75, width:75, borderRadius:75, backgroundColor:'white',alignSelf:'center'}}>
+        <View style={{padding:8, height:100, width:100,  backgroundColor:'white',alignSelf:'center',borderRadius:8}}>
         <Image
-            style={{width:50,height:50, alignSelf:'center'}}
+            resizeMode='contain'
+            style={{width:100,height:75, alignSelf:'center'}}
             source={{uri:data.icon}}
         />
         </View>
-
-        <Text style={{fontFamily:'medium',alignSelf:'center',fontSize:14}}>{data.name}</Text>
         </TouchableOpacity>
+        <Text style={{fontFamily:'medium',alignSelf:'center',fontSize:14}}>{data.name}</Text>
         </View>
     )
 
